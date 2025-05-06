@@ -1,70 +1,116 @@
-# ER Diagram Submission - Student Name
+![image](https://github.com/user-attachments/assets/2e99ff15-0d87-4173-9cc2-eb97c7528786)# Experiment 1: Entity-Relationship (ER) Diagram
+
+## 🎯 Objective:
+To understand and apply the concepts of ER modeling by creating an ER diagram for a real-world application.
+
+## 📚 Purpose:
+The purpose of this workshop is to gain hands-on experience in designing ER diagrams that visually represent the structure of a database including entities, relationships, attributes, and constraints.
+
+---
+
+## 🧪 Choose One Scenario:
+
+### 🔹 Scenario 1: University Database
+Design a database to manage students, instructors, programs, courses, and student enrollments. Include prerequisites for courses.
+
+**User Requirements:**
+- Academic programs grouped under departments.
+- Students have admission number, name, DOB, contact info.
+- Instructors with staff number, contact info, etc.
+- Courses have number, name, credits.
+- Track course enrollments by students and enrollment date.
+- Add support for prerequisites (some courses require others).
+
+---
+
+### 🔹 Scenario 2: Hospital Database
+Design a database for patient management, appointments, medical records, and billing.
+
+**User Requirements:**
+- Patient details including contact and insurance.
+- Doctors and their departments, contact info, specialization.
+- Appointments with reason, time, patient-doctor link.
+- Medical records with treatments, diagnosis, test results.
+- Billing and payment details for each appointment.
+
+---
+
+## 📝 Tasks:
+1. Identify entities, relationships, and attributes.
+2. Draw the ER diagram using any tool (draw.io, dbdiagram.io, hand-drawn and scanned).
+3. Include:
+   - Cardinality & participation constraints
+   - Prerequisites for University OR Billing for Hospital
+4. Explain:
+   - Why you chose the entities and relationships.
+   - How you modeled prerequisites or billing.
+
+# ER Diagram Submission - LINGESWARAN K 
 
 ## Scenario Chosen:
 University
 
 ## ER Diagram:
-![ER Diagram](er_diagram.png)
-![image](https://github.com/user-attachments/assets/dde8e2a5-650e-4c33-b5ce-6d8939a7aa43)
-
+![image](https://github.com/user-attachments/assets/20368457-f2d0-42f5-98ca-99468b8cef6b)
 
 ## Entities and Attributes:
-```
-USER: ID, NAME, PHNO, ADDRESS
-REGISTRATION: STU_ID, REG_ID, DATE, TYPE, DATE
-STUDENT: REG_NO, ID, NAME, DOB, DEPT, YEAR, YEAR_ENROLLED, CREDITS, FEE
-PROGRAM: PROG_NAME, PROG_ID, CREDIT_POINTS
-COURSE: NAME, ID, PREREQUISIT
-ATTEMPTS: YEAR, SEM, MARK, GRADE
-MANAGEMENT: (This appears to be a relationship, not an entity with its own attributes in this diagram)
-ENROLL: (This appears to be a relationship, not an entity with its own attributes in this diagram)
-CONTAINS: (This appears to be a relationship, not an entity with its own attributes in this diagram)
-ENROLLMENT: STATUS (This appears to be a relationship, not an entity with its own attributes in this diagram)
-```
+- ### Entity 1: USER
+**Attributes:** ID (Primary Key), NAME, PHNO, ADDRESS
+- ### Entity 2: STUDENT
+**Attributes:** ID (Primary Key), REGNO, NAME, DOB, DEPT, YEAR, YEAR_ENROLLED, CREDITS
+- ### Entity 3: PROGRAM
+**Attributes:**  PROG_ID (Primary Key), PROG_NAME, CREDIT_POINTS
+- ### Entity 4: COURSE
+**Attributes:** ID (Primary Key), NAME, PREREQUEST, STATUS, ENROLLMENT
+- ### Entity 5: REGISTRATION
+**Attributes:** REG_ID (Primary Key), STU_ID, DATE, TYPE
+...
+
 ## Relationships and Constraints:
+### Relationship1 - MANAGEMENT 
+**Between:**USER ↔ REGISTRATION
+**Cardinality:** 1:N from USER to REGISTRATION
+**Participation:** Total on REGISTRATION, Partial on USER
 
-```
-MANAGEMENT: USER manages REGISTRATION (Cardinality and Participation are not explicitly shown, but it implies
-a one-to-many relationship where one user can manage multiple registrations, and a registration is managed by 
-one user. Participation likely total for REGISTRATION and partial for USER).
+### Relationship2 - ENROLL
+**Between:** STUDENT ↔ PROGRAM
+**Cardinality:** M:1 (Many Students per Program)
+**Participation:** Total on STUDENT, Partial on PROGRAM
 
-REGISTRATION: STUDENT has REGISTRATION (Cardinality and Participation are not explicitly shown, but it implies 
-a one-to-many relationship where one student can have multiple registrations, and a registration belongs to one
-student. Participation likely total for REGISTRATION and partial for STUDENT).
+### Relationship 3 - CONTAINS 
+**Between:** PROGRAM ↔ COURSE
+**Cardinality:** 1:M from PROGRAM to COURSE
+**Participation:** Total on COURSE, Partial on PROGRAM
 
-ENROLL: STUDENT enrolls in PROGRAM (Cardinality and Participation are not explicitly shown, but it implies a many-to-many 
-relationship since a student can enroll in multiple programs, and a program can have multiple students. Participation is likely total for both).
+### Relationship 4 ATTEMPTS 
+**Between:** STUDENT ↔ COURSE
+**Cardinality:** M:N
+**Attributes:** YEAR, SEM, MARK, GRADE
+**Participation:** Partial on both sides
 
-CONTAINS: PROGRAM contains COURSE (Cardinality and Participation are not explicitly shown, but it implies a one-to-many
-relationship where one program can contain multiple courses, and a course belongs to one program. Participation likely total for COURSE and partial for PROGRAM).
+ ### Relationship 5 REGISTRATION 
+**Between:** STUDENT ↔ REGISTRATION
+**Cardinality:** 1:N from STUDENT to REGISTRATION
+**Participation:** Total on REGISTRATION, Partial on STUDENT
 
-ATTEMPTS: STUDENT has ATTEMPTS (Cardinality and Participation are not explicitly shown, but it implies a one-to-many relationship
-where one student can have multiple attempts for different courses, and an attempt belongs to one student. Participation likely 
-total for ATTEMPTS and partial for STUDENT).
+### Relationship 6 PREREQUEST 
+**Between:** COURSE ↔ COURSE
+**Cardinality:** 1:1 or M:1 (Optional prerequisite per course)
+**Participation:** Optional on both sides
+...
 
-ENROLLMENT: STUDENT enrolls in COURSE (Cardinality and Participation are not explicitly shown, but it implies a many-to-many relationship
-with an attribute 'STATUS', indicating the enrollment status of a student in a course. Participation is likely total for both).
-
-PREREQUISIT: COURSE has PREREQUISIT (This is a reflexive relationship on the COURSE entity, indicating that one course can be a
-prerequisite for another. Cardinality and Participation are not explicitly shown, but it's likely an optional many-to-many relationship,
-as a course can have multiple prerequisites and can be a prerequisite for multiple other courses, and some courses might not have any prerequisites).
-```
-
-## Extension (Prerequisite / Billing):
-```
-Prerequisite: Prerequisites are modeled through a reflexive relationship on the COURSE entity. The attribute
-PREREQUISIT (which should likely be PREREQ_ID to reference another course's ID) in the COURSE entity indicates which course(s)
-are required before taking a particular course. This structure allows for defining chains or multiple prerequisites for a single course.
-
-Billing: Billing information is partially modeled through the FEE attribute in the STUDENT entity. This suggests that each student
-has an associated fee. However, the diagram doesn't provide details on when or how these fees are applied (e.g., per program, per
-semester, per course) or any information about payment status, due dates, or billing history. To model billing more comprehensively,
- you might need additional entities like BILL, PAYMENT, or a more detailed structure within the REGISTRATION or a new enrollment-specific entity to track financial aspects.
-```
+## Extension - Prerequisite :
+Prerequisites are modeled as a self-referencing attribute (PREREQUEST) in the COURSE entity, indicating a course may require completion of another course prior to enrollment.
 
 ## Design Choices:
-```
-This ER diagram provides a good foundation for a student registration system, capturing key entities and their relationships.
-However, depending on the specific requirements, further refinement might be needed, especially in areas like billing and a clearer
-definition of the 'TYPE' attribute in the REGISTRATION entity.
-```
+- STUDENT and USER separated to distinguish academic and administrative roles.
+-PROGRAM and COURSE designed as core academic entities, linked by the CONTAINS relationship.
+- REGISTRATION used as a bridge between USER and STUDENT activity tracking.
+- ATTEMPTS relationship captures performance metrics across courses.
+- PREREQUEST allows course dependency modeling internally without a separate entity.
+
+
+
+## RESULT: 
+
+The ER diagram models a university system with six relationships—MANAGEMENT, ENROLL, CONTAINS, ATTEMPTS, REGISTRATION, and PREREQUEST—defining cardinality and participation, and modeling course prerequisites within the COURSE entity.
