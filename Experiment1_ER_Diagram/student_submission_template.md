@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/2e99ff15-0d87-4173-9cc2-eb97c7528786)# Experiment 1: Entity-Relationship (ER) Diagram
+# Experiment 1: Entity-Relationship (ER) Diagram
 
 ## 🎯 Objective:
 To understand and apply the concepts of ER modeling by creating an ER diagram for a real-world application.
@@ -68,39 +68,42 @@ University
 
 ## Relationships and Constraints:
 ### Relationship1 - MANAGEMENT 
-**Between:**USER ↔ REGISTRATION
-**Cardinality:** 1:N from USER to REGISTRATION
-**Participation:** Total on REGISTRATION, Partial on USER
+- **Between:** USER ↔ REGISTRATION
+- **Cardinality:** 1:N from USER to REGISTRATION
+- **Participation:** Total on REGISTRATION, Partial on USER
 
 ### Relationship2 - ENROLL
-**Between:** STUDENT ↔ PROGRAM
-**Cardinality:** M:1 (Many Students per Program)
-**Participation:** Total on STUDENT, Partial on PROGRAM
+- **Between:** STUDENT ↔ PROGRAM
+- **Cardinality:** M:1 (Many Students per Program)
+- **Participation:** Total on STUDENT, Partial on PROGRAM
 
 ### Relationship 3 - CONTAINS 
-**Between:** PROGRAM ↔ COURSE
-**Cardinality:** 1:M from PROGRAM to COURSE
-**Participation:** Total on COURSE, Partial on PROGRAM
+- **Between:** PROGRAM ↔ COURSE
+- **Cardinality:** 1:M from PROGRAM to COURSE
+- **Participation:** Total on COURSE, Partial on PROGRAM
 
 ### Relationship 4 ATTEMPTS 
-**Between:** STUDENT ↔ COURSE
-**Cardinality:** M:N
-**Attributes:** YEAR, SEM, MARK, GRADE
-**Participation:** Partial on both sides
+- **Between:** STUDENT ↔ COURSE
+- **Cardinality:** M:N
+- **Attributes:** YEAR, SEM, MARK, GRADE
+- **Participation:** Partial on both sides
 
  ### Relationship 5 REGISTRATION 
-**Between:** STUDENT ↔ REGISTRATION
-**Cardinality:** 1:N from STUDENT to REGISTRATION
-**Participation:** Total on REGISTRATION, Partial on STUDENT
+- **Between:** STUDENT ↔ REGISTRATION
+- **Cardinality:** 1:N from STUDENT to REGISTRATION
+- **Participation:** Total on REGISTRATION, Partial on STUDENT
 
 ### Relationship 6 PREREQUEST 
-**Between:** COURSE ↔ COURSE
-**Cardinality:** 1:1 or M:1 (Optional prerequisite per course)
-**Participation:** Optional on both sides
+- **Between:** COURSE ↔ COURSE
+- **Cardinality:** 1:1 or M:1 (Optional prerequisite per course)
+- **Participation:** Optional on both sides
 ...
 
 ## Extension - Prerequisite :
-Prerequisites are modeled as a self-referencing attribute (PREREQUEST) in the COURSE entity, indicating a course may require completion of another course prior to enrollment.
+In the diagram, prerequisites are modeled using the PREREQUEST attribute inside the COURSE entity. This means a course can mention another course as its required prerequisite. This helps the university system check if a student is eligible to take a particular course based on past course completions.
+By including it as an attribute (not a separate relationship), the design stays simple and still supports course dependencies in the academic structure.
+
+
 
 ## Design Choices:
 - STUDENT and USER separated to distinguish academic and administrative roles.
