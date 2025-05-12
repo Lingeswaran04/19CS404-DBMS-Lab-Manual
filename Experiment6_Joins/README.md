@@ -465,7 +465,8 @@ WHERE
 
 
 ## grade:
-![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/7b965ac9-c3be-476a-acd5-414383722904)
+
 
 
 
