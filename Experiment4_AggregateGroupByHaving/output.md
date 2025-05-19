@@ -214,5 +214,5 @@ GROUP BY medication;
 
 
 ### **Grade:**
-![image](https://github.com/user-attachments/assets/f48b9c1e-0da3-4eec-b344-7cf327d9977a)
+![image](https://github.com/user-attachments/assets/5e80e6a4-b823-48e5-9427-65319f278159)
 
